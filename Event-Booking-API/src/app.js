@@ -15,16 +15,31 @@ const errorHandler = require('./middlewares/errorHandler');
 
 const app = express();
 
+const normalizeOrigin = (value = '') => value.trim().replace(/\/+$/, '');
 const allowedOrigins = (process.env.CORS_ORIGINS || process.env.CORS_ORIGIN || '')
   .split(',')
-  .map((origin) => origin.trim())
+  .map((origin) => normalizeOrigin(origin))
   .filter(Boolean);
+
+const isRailwayFrontendOrigin = (origin) => {
+  try {
+    const url = new URL(origin);
+    return url.hostname.endsWith('.up.railway.app');
+  } catch {
+    return false;
+  }
+};
 
 const corsOptions = {
   origin(origin, callback) {
     // Allow non-browser clients and same-origin calls.
     if (!origin) return callback(null, true);
-    if (!allowedOrigins.length || allowedOrigins.includes(origin)) {
+    const normalizedOrigin = normalizeOrigin(origin);
+    if (
+      !allowedOrigins.length ||
+      allowedOrigins.includes(normalizedOrigin) ||
+      isRailwayFrontendOrigin(normalizedOrigin)
+    ) {
       return callback(null, true);
     }
     return callback(new Error(`CORS blocked for origin: ${origin}`));
