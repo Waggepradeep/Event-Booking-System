@@ -1,0 +1,32 @@
+{
+  "name": "event-booking-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "start": "nodemon src/server.js",
+    "test": "node -e \"console.log('No automated API tests configured yet')\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.17.1",
+    "mysql2": "^3.14.3",
+    "nodemailer": "^7.0.6",
+    "pdfkit": "^0.17.2",
+    "sequelize": "^6.37.7",
+    "stripe": "^20.3.1",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}

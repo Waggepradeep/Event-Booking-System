@@ -1,0 +1,16 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Event Booking API",
+    "version": "1.0.0",
+    "description": "Minimal OpenAPI spec to enable Swagger UI. Expand with real endpoints later."
+  },
+  "servers": [
+    { "url": "/" }
+  ],
+  "paths": {},
+  "components": {}
+}
+
+
+
