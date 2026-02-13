@@ -14,6 +14,11 @@ export default function Register() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { register } = useAuth();
+  const getErrorMessage = (err) =>
+    err?.response?.data?.error ||
+    err?.response?.data?.message ||
+    err?.message ||
+    'Registration failed';
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,7 +40,7 @@ export default function Register() {
       await register(formData);
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.message || 'Registration failed');
+      setError(getErrorMessage(err));
     } finally {
       setLoading(false);
     }

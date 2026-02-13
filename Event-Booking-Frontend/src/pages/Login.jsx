@@ -9,6 +9,11 @@ export default function Login() {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth();
+  const getErrorMessage = (err) =>
+    err?.response?.data?.error ||
+    err?.response?.data?.message ||
+    err?.message ||
+    'Login failed';
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +24,7 @@ export default function Login() {
       await login(email, password);
       navigate('/');
     } catch (err) {
-      setError(err.response?.data?.message || 'Login failed');
+      setError(getErrorMessage(err));
     } finally {
       setLoading(false);
     }
