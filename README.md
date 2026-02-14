@@ -40,3 +40,17 @@ npm run dev
 
 ## Security Note
 Do not commit `.env` files or real secrets. Use `.env.example` files with placeholders.
+
+## Troubleshooting (Railway DNS / NXDOMAIN)
+If your deployed Railway URL shows DNS errors like `DNS_PROBE_FINISHED_NXDOMAIN` (especially for `*.up.railway.app`), your local/ISP DNS may be blocking the domain.
+
+On Windows, switch DNS to Cloudflare and flush cache:
+
+```powershell
+netsh interface ip set dns name="Wi-Fi" static 1.1.1.1
+netsh interface ip add dns name="Wi-Fi" 1.0.0.1 index=2
+ipconfig /flushdns
+nslookup pleasing-comfort-production.up.railway.app
+```
+
+Expected `nslookup` result should resolve to an IP (not `Query refused` / `Non-existent domain`).
