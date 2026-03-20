@@ -9,7 +9,11 @@ const Booking = sequelize.define('Booking', {
   user_id: { type: DataTypes.INTEGER, allowNull: false },
   event_id: { type: DataTypes.INTEGER, allowNull: false },
   seats_booked: { type: DataTypes.INTEGER, allowNull: false, defaultValue: 1 },
-  payment_status: { type: DataTypes.ENUM('pending', 'paid', 'failed'), defaultValue: 'pending' },
+  payment_status: { 
+  type: DataTypes.STRING(20), 
+  defaultValue: 'pending',
+  validate: { isIn: [['pending', 'paid', 'failed']] }
+},
   payment_id: { type: DataTypes.STRING(255) }
 }, {
   tableName: 'bookings',
